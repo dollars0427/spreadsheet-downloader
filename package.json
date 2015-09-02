@@ -1,19 +1,12 @@
 {
-  "name": "gdcopy",
-  "description": "A tool for copy file from google drive.",
+  "name": "wsdownloader",
+  "description": "The downloader of google worksheet",
   "version": "0.0.1",
   "author": "Sardo Ip<sardo.ip@nxtomo.hk>",
   "dependencies": {
     "googleapis": "1.0.20",
     "readline-sync": "0.4.9",
-    "log4js":"0.6.21",
-  },
-  "license": "MIT",
-  "engines": {
-    "node": ">=0.10"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
+    "log4js":"0.6.21"
+},
+  "license": "MIT"
 }
