@@ -25,6 +25,7 @@ function printUsage() {
 }
 
 var drive = null;
+var token = null;
 
 try {
 	var oauth2Client = new OAuth2Client(oauthSetting.CLIENT_ID,
@@ -32,7 +33,7 @@ try {
 
 	var getToken = fs.readFileSync('token.saved', 'utf8');
 
-	var token = JSON.parse(getToken);
+	token = JSON.parse(getToken);
 
 	oauth2Client.setCredentials(token);
 
@@ -43,23 +44,43 @@ try {
 	process.exit(1);
 }
 
-function getFileInfo(oauthClient){
+function getFileInfo(oauthClient) {
 
-    drive = google.drive({version:'v2',auth: oauthClient});
+	drive = google.drive({
+		version: 'v2',
+		auth: oauthClient
+	});
 
-    drive.files.get({fileId:target},function(err,info){
+	drive.files.get({
+		fileId: target
+	}, function(err, info) {
 
-        if(err){
+		if (err) {
 
-            logger.error(err);
+			logger.error(err);
 
-            return;
-        }
+			return;
+		}
 
-        logger.debug('The export links of this worksheets is: '
-        + info.exportLinks['text/csv']);
+		logger.debug('The Target file is : ' + info.title);
 
-        
+		var exportLinks = info.exportLinks['text/csv'];
 
-    });
+		downloadCsv(exportLinks);
+	});
+}
+
+function downloadCsv(exportLinks) {
+
+	logger.debug(exportLinks);
+
+	var accessToken = token['access_token'];
+
+	request.get({
+			uri: exportLinks,
+			headers: {
+				Authorization:'Bearer ' + accessToken
+			}
+		})
+		.pipe(fs.createWriteStream('./test.csv'));
 }
