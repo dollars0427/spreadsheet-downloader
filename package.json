@@ -2,11 +2,12 @@
   "name": "wsdownloader",
   "description": "The downloader of google worksheet",
   "version": "0.0.1",
-  "author": "Sardo Ip<sardo.ip@nxtomo.hk>",
+  "author": "Mr.Twister<sardo.ip@sardo.work>",
   "dependencies": {
     "googleapis": "1.0.20",
     "readline-sync": "0.4.9",
-    "log4js":"0.6.21"
+    "log4js":"0.6.21",
+    "request":"2.61.0"
 },
   "license": "MIT"
 }
