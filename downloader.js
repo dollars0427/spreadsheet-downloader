@@ -74,13 +74,11 @@ function downloadCsv(exportLinks) {
 
 	logger.debug(exportLinks);
 
-	var accessToken = token['access_token'];
+	var accessToken = drive._options.auth.credentials.access_token;
 
-	request.get({
-			uri: exportLinks,
-			headers: {
-				Authorization:'Bearer ' + accessToken
-			}
-		})
-		.pipe(fs.createWriteStream('./test.csv'));
+	var params = {
+		access_token: accessToken
+    };
+
+	request.get({url:exportLinks, qs:params}).pipe(fs.createWriteStream('./test.csv'));
 }
