@@ -24,6 +24,7 @@ $ npm install
 Configuration
 -----------
 1.Copy the configuration file and edit it: 
+
 ```bash
 $ cp option.conf.sample option.conf 
 $ vi option.conf
