@@ -25,7 +25,6 @@ function printUsage() {
 }
 
 var drive = null;
-var token = null;
 
 try {
 	var oauth2Client = new OAuth2Client(oauthSetting.CLIENT_ID,
@@ -72,13 +71,25 @@ function getFileInfo(oauthClient) {
 
 function downloadCsv(exportLinks) {
 
-	logger.debug(exportLinks);
-
 	var accessToken = drive._options.auth.credentials.access_token;
 
 	var params = {
 		access_token: accessToken
-    };
+	};
 
-	request.get({url:exportLinks, qs:params}).pipe(fs.createWriteStream('./test.csv'));
+	request.get({
+			url: exportLinks,
+			qs: params
+		})
+		.on('response', function(res) {
+
+			// RegExp to extract the filename from Content-Disposition
+			var regexp = /filename=\"(.*)\"/gi;
+
+			var fileName = regexp.exec(res.headers['content-disposition'])[1];
+
+			var fws = fs.createWriteStream('./' + fileName);
+
+			res.pipe(fws);
+		});
 }
