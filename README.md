@@ -7,11 +7,7 @@ Install
 --------
 Note: This requires Node.js v0.10 to run. If you had not install it , you can download it at [http://nodejs.org/download/](http://nodejs.org/download/) . 
 
-1.Download the source or clone the git repository:
-
-```bash
-$ git@10.180.51.88:sardoip/spreadsheet-downloader.git
-```
+1.Download the source or clone the git repository.
 
 2.Switch to the project root directory:
 
