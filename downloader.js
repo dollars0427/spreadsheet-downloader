@@ -10,6 +10,7 @@ var oauthSetting = JSON.parse(fs.readFileSync('option.conf', 'utf8'));
 var target = process.argv[2];
 var gid = process.argv[3];
 
+//If the value of target file or gid not found, run print usage
 if (!target || !gid) {
 
 	printUsage();
@@ -18,6 +19,7 @@ if (!target || !gid) {
 
 }
 
+//Print the usage of the script.
 function printUsage() {
 
 	var out = "Usgae: " + process.argv[1] + " [target file id]" + " [worksheet gid]	";
@@ -26,6 +28,8 @@ function printUsage() {
 }
 
 var drive = null;
+
+//Check the oauth token is existed. If not existed, show error and exit.
 
 try {
 	var oauth2Client = new OAuth2Client(oauthSetting.CLIENT_ID,
@@ -43,6 +47,13 @@ try {
 	logger.error(err.message);
 	process.exit(1);
 }
+
+/**
+ * Get the file info by google drive api.
+ *
+ * @params {object} oauthClient
+ *
+ */
 
 function getFileInfo(oauthClient) {
 
@@ -70,6 +81,13 @@ function getFileInfo(oauthClient) {
 	});
 }
 
+/**
+ * Downolad the spreadsheet with csv format.
+ *
+ * @params {string} exportLinks
+ *
+ */
+
 function downloadCsv(exportLinks) {
 
 	var accessToken = drive._options.auth.credentials.access_token;
@@ -85,12 +103,12 @@ function downloadCsv(exportLinks) {
 		})
 		.on('response', function(res) {
 
-			// RegExp to extract the filename from Content-Disposition
+			// Get the filename from Content-Disposition
 			var regexp = /filename=\"(.*)\"/gi;
 
 			var fileName = regexp.exec(res.headers['content-disposition'])[1];
 
-			var fws = fs.createWriteStream('./' + fileName);
+			var fws = fs.createWriteStream('./downoloaded' + fileName);
 
 			res.pipe(fws);
 		});
