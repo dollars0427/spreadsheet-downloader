@@ -8,8 +8,9 @@ var OAuth2Client = google.auth.OAuth2;
 var oauthSetting = JSON.parse(fs.readFileSync('option.conf', 'utf8'));
 
 var target = process.argv[2];
+var gid = process.argv[3];
 
-if (!target) {
+if (!target || !gid) {
 
 	printUsage();
 
@@ -19,7 +20,7 @@ if (!target) {
 
 function printUsage() {
 
-	var out = "Usgae: " + process.argv[1] + " [target file id]";
+	var out = "Usgae: " + process.argv[1] + " [target file id]" + " [worksheet gid]	";
 
 	console.log(out);
 }
@@ -74,7 +75,8 @@ function downloadCsv(exportLinks) {
 	var accessToken = drive._options.auth.credentials.access_token;
 
 	var params = {
-		access_token: accessToken
+		access_token: accessToken,
+		gid: gid
 	};
 
 	request.get({
