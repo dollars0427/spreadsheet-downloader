@@ -2,3 +2,4 @@ option.conf
 token.saved
 node_modules
 test.*
+*.csv
