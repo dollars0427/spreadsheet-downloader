@@ -7,10 +7,10 @@ var logger = log4js.getLogger('Downloader');
 var OAuth2Client = google.auth.OAuth2;
 var oauthSetting = JSON.parse(fs.readFileSync('oauth.conf', 'utf8'));
 
-var sheetConfig = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+var sheetConfigPath = process.argv[2];
 
 //If the path of spreadsheet config not found, run print usage
-if (!sheetConfig) {
+if (!sheetConfigPath) {
 
 	printUsage();
 
@@ -18,10 +18,12 @@ if (!sheetConfig) {
 
 }
 
+var sheetConfig = JSON.parse(fs.readFileSync(sheetConfigPath, 'utf8'));
+
 //Print the usage of the script.
 function printUsage() {
 
-	var out = "Usgae: " + process.argv[1] + "[path of spreadsheet config]";
+	var out = "Usgae: " + process.argv[1] + " [path of spreadsheet config]";
 
 	console.log(out);
 }
@@ -107,7 +109,7 @@ function downloadCsv(exportLinks) {
 
 			var fileName = regexp.exec(res.headers['content-disposition'])[1];
 
-			var fws = fs.createWriteStream('./downoloaded' + fileName);
+			var fws = fs.createWriteStream(fileName);
 
 			res.pipe(fws);
 		});
