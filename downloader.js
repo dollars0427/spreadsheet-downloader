@@ -24,7 +24,7 @@ var sheetConfig = JSON.parse(fs.readFileSync(sheetConfigPath, 'utf8'));
 //Print the usage of the script.
 function printUsage() {
 
-	var out = "Usgae: " + process.argv[1] + " [path of spreadsheet config]" + " [path of output file]";
+	var out = "Usgae: " + process.argv[1] + " [path of spreadsheet config file]" + " [path of output file]";
 
 	console.log(out);
 }
