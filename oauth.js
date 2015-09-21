@@ -1,7 +1,7 @@
 var google = require('googleapis');
 var fs = require('fs');
 var OAuth2Client = google.auth.OAuth2;
-var setting = JSON.parse(fs.readFileSync('option.conf', 'utf8'));
+var setting = JSON.parse(fs.readFileSync('oauth.conf', 'utf8'));
 var CLIENT_ID = setting.CLIENT_ID;
 var CLIENT_SECRET = setting.CLIENT_SECRET;
 var REDIRECT_URL = setting.REDIRECT_URL;
@@ -42,7 +42,7 @@ function getAccessToken(oauth2Client) {
         }
 
         fs.writeFileSync('token.saved',JSON.stringify(tokens));
-        
+
         infoLogger.info("Get AccessToken Finished.");
     });
 }
