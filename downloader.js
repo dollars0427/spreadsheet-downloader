@@ -7,11 +7,10 @@ var logger = log4js.getLogger('Downloader');
 var OAuth2Client = google.auth.OAuth2;
 var oauthSetting = JSON.parse(fs.readFileSync('oauth.conf', 'utf8'));
 
-var target = process.argv[2];
-var gid = process.argv[3];
+var sheetConfig = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
 
-//If the value of target file or gid not found, run print usage
-if (!target || !gid) {
+//If the path of spreadsheet config not found, run print usage
+if (!sheetConfig) {
 
 	printUsage();
 
