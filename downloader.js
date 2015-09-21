@@ -62,7 +62,7 @@ function getFileInfo(oauthClient) {
 	});
 
 	drive.files.get({
-		fileId: target
+		fileId: sheetConfig.sheetId
 	}, function(err, info) {
 
 		if (err) {
@@ -93,7 +93,7 @@ function downloadCsv(exportLinks) {
 
 	var params = {
 		access_token: accessToken,
-		gid: gid
+		gid: sheetConfig.gId
 	};
 
 	request.get({
