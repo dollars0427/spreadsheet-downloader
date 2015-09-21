@@ -23,14 +23,14 @@ $ npm install
 
 Configuration
 -----------
-1.Copy the configuration file and edit it: 
+1.Copy the oauth configuration file and edit it: 
 
 ```bash
-$ cp option.conf.sample option.conf 
-$ vi option.conf
+$ cp oauth.conf.sample oauth.conf 
+$ vi oauth.conf
 ```
 
-2.Enter your client id and sercet to the configuration file.
+2.Enter your client id and sercet into the configuration file.
 
 ```json
 {
@@ -41,8 +41,23 @@ $ vi option.conf
 "SCOPE" : "https://www.googleapis.com/auth/drive"
 }
 
-``` 
+```
 
+3.Copy the wordsheet configuration file and edit it: 
+
+```bash
+$ cp sheet.conf.sample sheet.conf 
+$ vi sheet.conf
+```
+
+4.Enter the target spreadsheet and worksheet id into the configuration file:
+
+```json
+{
+"sheetId" : "The spreadsheet id",
+"gId" : "The worksheet id"
+}
+```
 
 Usage
 --------
@@ -55,10 +70,10 @@ $node oauth.js
 2.Run downloader.js to download the spreadsheet with csv format from google drive:
 
 ```
-$node downloader.js [target file id] [worksheet gid]
+$node downloader.js [path of spreadsheet config file] [path of output file]
 ```
 
-3.After that, you can get the file in spreadsheet-downloader/downloaded folder.
+3.After that, you can get the file at your assigned path.
 
 BUG
 --------
