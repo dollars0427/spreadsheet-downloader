@@ -43,6 +43,10 @@ $ vi oauth.conf
 
 ```
 
+If you don't have your own client id and client secret , please create a project at Google Developers Console , enable the google drive api at APIS and create new Client ID at Credentials page.
+
+**Note: The application type must be "Installed application", and Installed application type must be "other".**
+
 3.Copy the wordsheet configuration file and edit it: 
 
 ```bash
