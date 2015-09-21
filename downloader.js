@@ -105,11 +105,6 @@ function downloadCsv(exportLinks) {
 		})
 		.on('response', function(res) {
 
-			// Get the filename from Content-Disposition
-			var regexp = /filename=\"(.*)\"/gi;
-
-			var fileName = regexp.exec(res.headers['content-disposition'])[1];
-
 			var fws = fs.createWriteStream(outputPath);
 
 			res.pipe(fws);
