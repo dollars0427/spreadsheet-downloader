@@ -8,9 +8,10 @@ var OAuth2Client = google.auth.OAuth2;
 var oauthSetting = JSON.parse(fs.readFileSync('oauth.conf', 'utf8'));
 
 var sheetConfigPath = process.argv[2];
+var outputPath = process.argv[3];
 
 //If the path of spreadsheet config not found, run print usage
-if (!sheetConfigPath) {
+if (!sheetConfigPath || !outputPath) {
 
 	printUsage();
 
@@ -23,7 +24,7 @@ var sheetConfig = JSON.parse(fs.readFileSync(sheetConfigPath, 'utf8'));
 //Print the usage of the script.
 function printUsage() {
 
-	var out = "Usgae: " + process.argv[1] + " [path of spreadsheet config]";
+	var out = "Usgae: " + process.argv[1] + " [path of spreadsheet config]" + " [path of output file]";
 
 	console.log(out);
 }
@@ -109,7 +110,7 @@ function downloadCsv(exportLinks) {
 
 			var fileName = regexp.exec(res.headers['content-disposition'])[1];
 
-			var fws = fs.createWriteStream(fileName);
+			var fws = fs.createWriteStream(outputPath);
 
 			res.pipe(fws);
 		});
