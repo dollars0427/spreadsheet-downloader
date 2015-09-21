@@ -3,3 +3,4 @@ token.saved
 node_modules
 test.*
 *.csv
+oauth.conf
