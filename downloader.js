@@ -5,7 +5,7 @@ var log4js = require('log4js');
 var logger = log4js.getLogger('Downloader');
 
 var OAuth2Client = google.auth.OAuth2;
-var oauthSetting = JSON.parse(fs.readFileSync('option.conf', 'utf8'));
+var oauthSetting = JSON.parse(fs.readFileSync('oauth.conf', 'utf8'));
 
 var target = process.argv[2];
 var gid = process.argv[3];
@@ -22,7 +22,7 @@ if (!target || !gid) {
 //Print the usage of the script.
 function printUsage() {
 
-	var out = "Usgae: " + process.argv[1] + " [target file id]" + " [worksheet gid]	";
+	var out = "Usgae: " + process.argv[1] + "[path of spreadsheet config]";
 
 	console.log(out);
 }
