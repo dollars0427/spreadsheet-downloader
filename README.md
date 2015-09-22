@@ -58,8 +58,7 @@ $ vi sheet.conf
 
 ```json
 {
-"sheetId" : "The spreadsheet id",
-"gId" : "The worksheet id"
+"sheetId" : "The spreadsheet id"
 }
 ```
 
