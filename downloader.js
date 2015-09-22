@@ -77,7 +77,7 @@ function getFileInfo(oauthClient) {
 
 		logger.debug('The Target file is : ' + info.title);
 
-		var exportLinks = info.exportLinks['text/csv'];
+		var exportLinks = info.exportLinks['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
 
 		downloadCsv(exportLinks);
 	});
@@ -95,8 +95,7 @@ function downloadCsv(exportLinks) {
 	var accessToken = drive._options.auth.credentials.access_token;
 
 	var params = {
-		access_token: accessToken,
-		gid: sheetConfig.gId
+		access_token: accessToken
 	};
 
 	request.get({
